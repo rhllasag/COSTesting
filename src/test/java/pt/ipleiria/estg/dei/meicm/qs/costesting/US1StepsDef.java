@@ -1,11 +1,17 @@
+package pt.ipleiria.estg.dei.meicm.qs.costesting;
+
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import static junit.framework.TestCase.assertEquals;
 
 public class US1StepsDef {
@@ -28,7 +34,7 @@ public class US1StepsDef {
     public void iCanSeeTheText(String title) throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, 3);
         wait.until(ExpectedConditions.textToBePresentInElement(
-                driver.findElement(By.tagName("body")),text));
+                driver.findElement(By.tagName("body")),title));
     }
     @Before
     public void setUp()throws Exception{
