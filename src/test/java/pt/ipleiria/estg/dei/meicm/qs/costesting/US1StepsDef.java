@@ -53,13 +53,6 @@ public class US1StepsDef {
                 driver.findElement(By.tagName("body")),title));
     }
 
-    @Then("^In the \"([^\"]*)\" should be the values \"([^\"]*)\", \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void inTheShouldBeTheValuesAnd(String rownum, String id, String name, String email) throws Throwable {
-        assertEquals(driver.findElement(By.xpath("//tbody/tr["+ rownum +"]/td[1]")).getText(), id);
-        assertEquals(driver.findElement(By.xpath("//tbody/tr["+ rownum +"]/td[2]")).getText(), name);
-        assertEquals(driver.findElement(By.xpath("//tbody/tr["+ rownum +"]/td[3]")).getText(), email);
-    }
-
     @Then("^Details Page appears$")
     public void detailsPageAppears() throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, 3);
@@ -78,4 +71,21 @@ public class US1StepsDef {
         assertEquals(columnsList.size(), 4);
     }
 
+    @When("^I click the details button for the user with \"([^\"]*)\"$")
+    public void iClickTheDetailsButtonForTheUserWith(String id) throws Throwable {
+        String elementId = "contact-row-" + id;
+        driver.findElement(By.xpath("//a[contains(@href, 'details.php?id="+id+"')]")).click();
+    }
+
+    @Then("^Details Page should have \"([^\"]*)\" on the second row$")
+    public void detailsPageShouldHaveOnTheSecondRow(String id) throws Throwable {
+        assertEquals(driver.findElement(By.xpath("//tr[2]/td[2]")).getText(), id);
+    }
+
+    @Then("^The number of table rows should match the number of contacts shown on the field \"([^\"]*)\"$")
+    public void theNumberOfTableRowsShouldMatchTheNumberOfContactsShownOnTheField(String id) throws Throwable {
+        List<WebElement> contactsList = driver.findElement(By.tagName("tbody")).findElements(By.tagName("tr"));
+        String numContacts = driver.findElement(By.id(id)).getText();
+        assertEquals(numContacts,Integer.toString(contactsList.size()));
+    }
 }

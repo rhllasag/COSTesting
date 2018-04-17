@@ -12,6 +12,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.json.*;
+
 
 import java.util.List;
 
@@ -62,5 +64,18 @@ public class US2StepsDef {
         WebDriverWait wait = new WebDriverWait(driver, 3);
         wait.until(ExpectedConditions.titleContains("Contacts Orchestrator Solution"));
         assertEquals(driver.findElement(By.tagName("title")).getText(), "Contacts Orchestrator Solution");
+    }
+
+    @Then("^the message \"([^\"]*)\" should be present$")
+    public void theMessageShouldBePresent(String message) throws Throwable {
+        String errorJson = driver.findElement(By.tagName("body")).getText();
+        JSONObject obj = new JSONObject(errorJson);
+        String errMsg = obj.getString("message");
+        assertEquals(message, errMsg);
+    }
+
+    @Given("^I access the details page of COS with no guid$")
+    public void iAccessTheDetailsPageOfCOS() throws Throwable {
+        driver.get("http://localhost:8080/details.php");
     }
 }

@@ -13,21 +13,23 @@ Feature: Access to the Contacts Orchestrator Solution's (COS) Landing Page
     Given I access the landing page of COS
     Then the table should have four columns
 
-    @noerror
+  @noerror
   Scenario: Click on the details button
     Given I access the landing page of COS
     When I click the details button
     Then Details Page appears
 
   @noerror
-  Scenario Outline: Table values
+  Scenario Outline: Click on the details button
     Given I access the landing page of COS
-    Then In the "<rownumber>" should be the values "<id>", "<name>" and "<email>"
+    When I click the details button for the user with "<id>"
+    Then Details Page should have "<id>" on the second row
     Examples:
-    | rownumber | id | name | email |
-    | 1         | d4f8d88d-afe1-4c63-821a-278883d6bb49 | Estevan | 	EstevanRibeiroRodrigues@cuvox.de |
-    | 2         | 021a1dc3-5b75-4868-bb03-333170ce9acb | Joao    | JoaoRibeiroSantos@teleworm.us     |
-    | 3         | 24789e26-a833-402d-9800-0f9f1433ba79 | Sophia  | SophiaFernandesBarros@cuvox.de    |
+    | id |
+    | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
 
-
+  @noerror
+  Scenario: Number o contacts on the list
+    Given I access the landing page of COS
+    Then The number of table rows should match the number of contacts shown on the field "num-contacts"
 
