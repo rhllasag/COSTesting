@@ -2,40 +2,39 @@ Feature: Access to the Contact Details Page
   As a user
   I want to access to the contact detail page
   So that I can see the details of the selected contact
-  Scenario: Detail page's title and text contains "Contact Detail"
-    Given I access the details page of COS
-    Then the title of the page should be "Contact Detail"
-    And I can see the text "Contact Detail"
-  Scenario: Detail page's contains an image
-    Given I access the details page of COS
-    Then the "image" is loaded
-    And I can see the "image"
-  Scenario: Table contains the header "Contact Detail"
-    Given I access the details page of COS
-    Then the table should have the header "Contact Detail"
-  Scenario: Table contains nine rows on the first column
-    Given I access the details page of COS
-    Then the table should have the row "name"
-    And the table should have the row "surname"
-    And the table should have the row "birthday"
-    And the table should have the row "phone"
-    And the table should have the row "email"
-    And the table should have the row "street_address"
-    And the table should have the row "city"
-    And the table should have the row "occupation"
-    And the table should have the row "company"
 
-  Scenario: Table information of the contact is present on the second column
-    Given I access the details page of COS
-    Then the table should have the row "name_detail"
-    When the row "name_detail" is not empty
+  @noerror
+  Scenario Outline: Detail page's title
+    Given I access the details page of COS with "<id>"
+    Then the title of details the page should be "Contacts Orchestrator Solution - Contact details"
+    Examples:
+    | id |
+    | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
 
+  @noerror
+  Scenario Outline: Table rows number
+    Given I access the details page of COS with "<id>"
+    Then the table should have eleven rows
+    Examples:
+      | id |
+      | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
 
-    And the table should have the row "surname"
-    And the table should have the row "birthday"
-    And the table should have the row "phone"
-    And the table should have the row "email"
-    And the table should have the row "street_address"
-    And the table should have the row "city"
-    And the table should have the row "occupation"
-    And the table should have the row "company"
+  @noerror
+  Scenario Outline: Table data
+    Given I access the details page of COS with "<id>"
+    Then the "<rownumber>" should have "<rowvalue>" on the second column
+    Examples:
+      | id | rownumber | rowvalue |
+      | d4f8d88d-afe1-4c63-821a-278883d6bb49 | 3 | Estevan |
+      | d4f8d88d-afe1-4c63-821a-278883d6bb49 | 4 | Rodrigues |
+      | 021a1dc3-5b75-4868-bb03-333170ce9acb| 3 | Joao |
+      | 021a1dc3-5b75-4868-bb03-333170ce9acb| 4 | Santos |
+
+  @noerror
+  Scenario Outline: Go back to landing page
+    Given I access the details page of COS with "<id>"
+    When I click the Go back button
+    Then the landing page appears
+    Examples:
+      | id |
+      | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
