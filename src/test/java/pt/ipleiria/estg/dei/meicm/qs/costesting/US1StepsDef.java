@@ -16,7 +16,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 
 public class US1StepsDef {
@@ -87,5 +90,23 @@ public class US1StepsDef {
         List<WebElement> contactsList = driver.findElement(By.tagName("tbody")).findElements(By.tagName("tr"));
         String numContacts = driver.findElement(By.id(id)).getText();
         assertEquals(numContacts,Integer.toString(contactsList.size()));
+    }
+
+    @Then("^the email field has a valid email for the user with \"([^\"]*)\"$")
+    public void theEmailFieldHasAValidEmailForTheUserWith(String id) throws Throwable {
+        List<WebElement> columnsList = driver.findElement(By.id("contact-row-"+id)).findElements(By.tagName("td"));
+        String email = columnsList.get(2).getText();
+        Pattern p = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = p.matcher(email);
+        assertTrue(matcher.find());
+    }
+
+    @Then("^the guid field has a valid guid for the user with \"([^\"]*)\"$")
+    public void theGuidFieldHasAValidGuidForTheUserWith(String id) throws Throwable {
+        List<WebElement> columnsList = driver.findElement(By.id("contact-row-"+id)).findElements(By.tagName("td"));
+        String guid = columnsList.get(0).getText();
+        Pattern p = Pattern.compile("^[a-z0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}$");
+        Matcher matcher = p.matcher(guid);
+        assertTrue(matcher.find());
     }
 }

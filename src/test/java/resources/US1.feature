@@ -20,7 +20,7 @@ Feature: Access to the Contacts Orchestrator Solution's (COS) Landing Page
     Then Details Page appears
 
   @noerror
-  Scenario Outline: Click on the details button
+  Scenario Outline: Click on the details button by id
     Given I access the landing page of COS
     When I click the details button for the user with "<id>"
     Then Details Page should have "<id>" on the second row
@@ -32,4 +32,20 @@ Feature: Access to the Contacts Orchestrator Solution's (COS) Landing Page
   Scenario: Number o contacts on the list
     Given I access the landing page of COS
     Then The number of table rows should match the number of contacts shown on the field "num-contacts"
+
+  @noerror
+  Scenario Outline: Emails is valid
+    Given I access the landing page of COS
+    Then the email field has a valid email for the user with "<id>"
+    Examples:
+    | id |
+    | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
+
+    @noerror
+    Scenario Outline: GUID is valid
+      Given I access the landing page of COS
+      Then the guid field has a valid guid for the user with "<id>"
+      Examples:
+        | id |
+        | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
 

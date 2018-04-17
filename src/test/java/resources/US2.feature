@@ -32,6 +32,14 @@ Feature: Access to the Contact Details Page
       | 021a1dc3-5b75-4868-bb03-333170ce9acb| 3 | Joao |
       | 021a1dc3-5b75-4868-bb03-333170ce9acb| 4 | Santos |
 
+    @noerror
+      Scenario Outline: Phone number is not empty
+      Given I access the details page of COS with "<id>"
+      Then the field phone shouldn't be empty
+      Examples:
+      | id |
+      | d4f8d88d-afe1-4c63-821a-278883d6bb49  |
+
   @noerror
   Scenario Outline: Go back to landing page
     Given I access the details page of COS with "<id>"
@@ -53,3 +61,35 @@ Feature: Access to the Contact Details Page
   Scenario: User Guid empty
     Given I access the details page of COS with no guid
     Then the message "User guid is required" should be present
+
+  @noerror
+  Scenario Outline: Valid Date format
+    Given I access the details page of COS with "<id>"
+    Then the date format should be "MM/dd/yyyy"
+    Examples:
+      | id |
+      | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
+
+  @noerror
+  Scenario Outline: Valid email format
+    Given I access the details page of COS with "<id>"
+    Then the value on the email field should be a valid email
+    Examples:
+      | id |
+      | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
+
+  @noerror
+  Scenario Outline: Phone has only numbers
+    Given I access the details page of COS with "<id>"
+    Then the value on the phone field should be valid
+    Examples:
+      | id |
+      | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
+
+  @noerror
+  Scenario Outline: GUID is valid
+    Given I access the details page of COS with "<id>"
+    Then the value on the guid field should be a valid
+    Examples:
+      | id |
+      | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
