@@ -49,6 +49,7 @@ public class US2StepsDef {
     public void theTitleOfDetailsThePageShouldBe(String title) throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, 3);
         wait.until(ExpectedConditions.titleContains(title));
+
     }
 
     @Then("^the table should have eleven rows$")

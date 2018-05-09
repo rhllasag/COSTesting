@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
 
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
-
 public class US1StepsDef {
     private WebDriver driver;
 
