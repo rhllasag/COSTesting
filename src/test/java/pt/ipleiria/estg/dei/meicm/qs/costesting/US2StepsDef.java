@@ -42,7 +42,7 @@ public class US2StepsDef {
 
     @Given("^I access the details page of COS with \"([^\"]*)\"$")
     public void iAccessTheDetailsPageOfCOSWith(String id) throws Throwable {
-        driver.get("http://localhost:8080/details.php?id="+id);
+        driver.get("http://35.195.26.198/details.php?id="+id);
     }
 
     @Then("^the title of details the page should be \"([^\"]*)\"$")

@@ -37,7 +37,7 @@ public class US1StepsDef {
 
     @Given("^I access the landing page of COS$")
     public void iAccessTheLandingPageOfCOS() throws Throwable {
-        driver.get("http://localhost:8080");
+        driver.get("http://35.195.26.198");
         assertEquals ("Contacts Orchestrator Solution",driver.getTitle());
 
     }
