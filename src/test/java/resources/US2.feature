@@ -70,6 +70,8 @@ Feature: Access to the Contact Details Page
       | id |
       | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
 
+
+    
   @noerror
   Scenario Outline: Valid email format
     Given I access the details page of COS with "<id>"
