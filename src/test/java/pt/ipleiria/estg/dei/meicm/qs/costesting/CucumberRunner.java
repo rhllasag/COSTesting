@@ -6,5 +6,5 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(format = {"pretty", "html:reports/test-report"},
-tags = {"@exercise"})
+features = "src/test/java/resources" )
 public class CucumberRunner { }
