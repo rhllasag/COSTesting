@@ -6,14 +6,14 @@ Feature: Access to the Contacts Review Page
   @noerror
   Scenario: Contacts Review page's title
     Given I access the contacts review page
-    Then the title of details the page should be "Contacts Review"
+    Then the title of the  review page should be "Contacts Review"
   @noerror
   Scenario: Contacts Review page's subtitle
     Given I access the contacts review page
     Then the subtitle of details the page should be "Duplicated Contacts"
   @noerror
   Scenario: The columns of the filtering table
-    Given I access the landing page of COS
-    Then The names of the columns of the filtering table are "ID", "Name", "Email" , "Social"and "Action"
+    Given I access the contacts review page
+    Then The names of the columns of the review table are "ID", "Name", "Email" , "Social"and "Action"
 
 
