@@ -69,5 +69,9 @@
     <orderEntry type="library" name="Maven: io.cucumber:tag-expressions:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: io.cucumber:cucumber-junit:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20180130" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: info.cukes:cucumber-java:1.2.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: info.cukes:cucumber-core:1.2.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: info.cukes:cucumber-jvm-deps:1.0.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: info.cukes:gherkin:2.12.2" level="project" />
   </component>
 </module>
