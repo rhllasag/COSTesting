@@ -65,7 +65,7 @@ Feature: Access to the Contact Details Page
   @noerror
   Scenario Outline: Valid Date format
     Given I access the details page of COS with "<id>"
-    Then the date format should be "MM/dd/yyyy"
+    Then the date format should be "dd/MM/yyyy"
     Examples:
       | id |
       | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
