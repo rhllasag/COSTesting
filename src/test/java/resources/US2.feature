@@ -69,8 +69,6 @@ Feature: Access to the Contact Details Page
     Examples:
       | id |
       | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
-
-
     
   @noerror
   Scenario Outline: Valid email format
