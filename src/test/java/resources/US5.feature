@@ -1,70 +1,50 @@
-Feature: Access to the Contacts Review Page
+Feature: Access to the Solve Duplicated Problems Page
   As a user
-  I want to access to the contacts review page
-  So that I can see the contacts of one user for then solve duplicated contacts
+  I want to access to the Solve Duplicated Page clicking the Solve Duplicate Button of the principal page
+  So that I can see the  duplicated contacts to solve throughout clicking on an action button
 
   @noerror
-  Scenario: Contacts Review page's title
-    Given I access the contacts review page
-    Then the title of the  review page should be "Contacts Review"
-  @noerror
-  Scenario: Contacts Review page's subtitle
-    Given I access the contacts review page
-    Then the subtitle of details the page should be "Duplicated Contacts"
-  @noerror
-  Scenario Outline: Columns name of Review Contacts page
+  Scenario: Solve Duplicated Page's title
     Given I access the landing page of COS
-    When  I choose the filtering "<enableFilter>" option and choose "<disabledFilter>" option and click on the detail button with "<id>"
-    Given I access the details page of COS with "<id>"
-    When I click the Contacts Review button
-    Then The Contacts Review page appears with the columns "ID", "Name" , "Email" ,"Source" and "Action"
-    Examples:
-      | enableFilter | disabledFilter | id|
-      | "Facebook"   | "Linkedin"     | "d47f5d81-5376-4b2d-a3a3-7ec92qw246f8" |
+    When I click the Solve Duplicated Button
+    Then the title of the  review page should be "Solve Duplicated Problems"
   @noerror
-  Scenario Outline: Review Contacts page for a specific source
+  Scenario: Columns name of Solve Duplicated Problems page
     Given I access the landing page of COS
-    When  I choose the filtering "<enableFilter>" option and choose "<disabledFilter>" option and click on the detail button with "<id>"
-    Given I access the details page of COS with "<id>"
-    When I click the Contacts Review button
-    Then The Contacts Review page appears with all rows of the fifth column with the value "<source>"
-    Examples:
-      | enableFilter | disabledFilter | source | id|
-      | "Facebook"   | "Linkedin"     | "Facebook"   | "d47f5d81-5376-4b2d-a3a3-7ec92qw246f8" |
-      | "Linkedin"   | "Facebook"     | "Linkedin"   | "d47f5d81-5376-4b2d-a3a3-7ec92qw246qw" |
-  @noerror
-  Scenario Outline: Review Contacts page have a action button to solve duplicated contacts
-    Given I access the landing page of COS
-    When  I choose the filtering "<enableFilter>" option and choose "<disabledFilter>" option and click on the detail button with "<id>"
-    Given I access the details page of COS with "<id>"
-    When I click the Contacts Review button
-    Then The Contacts Review page appears with all the contacts independent of the source and a clickable button "Solve Duplicated" in the fifth column
-    Examples:
-      | enableFilter | disabledFilter | id|
-      | "Facebook"   | "Linkedin"     | "d47f5d81-5376-4b2d-a3a3-7ec92qw246f8" |
-      | "Linkedin"   | "Facebook"     | "d47f5d81-5376-4b2d-a3a3-7ec92qw246qw" |
-
-  Scenario Outline: Clicking on the button for Solve Duplicated  by Source, the user access to the Solve Duplicated Page
-    Given I access the landing page of COS
-    When  I choose the filtering "<enableFilter>" option and choose "<disabledFilter>" option and click on the detail button with "<id>"
-    Given I access the details page of COS with "<id>"
-    When I click the Contacts Review button
-    Given The Contacts Review page appears with a clickable button Solve Duplicated, and click it with the "<name>"
-    Then I access to the Solve Duplicated Problems page of COS
-    Examples:
-      | enableFilter | disabledFilter | id| name|
-      | "Facebook"   | "Linkedin"     | "d47f5d81-5376-4b2d-a3a3-7ec92qw246f8" | "Emilly"|
-      | "Linkedin"   | "Facebook"     | "d47f5d81-5376-4b2d-a3a3-7ec92qw246qw" | "Emilly"|
+    When I click the Solve Duplicated Button
+    Then The page appears with the columns "Repeated Field", "Times" , "Actions"
 
   @noerror
-  Scenario Outline: Return to Details page form Contacts Review page
+  Scenario: The  duplicated data is not empty and I can click on the Solve or Cancel button
     Given I access the landing page of COS
-    When  I choose the filtering "<enableFilter>" option and choose "<disabledFilter>" option and click on the detail button with "<id>"
-    Given I access the details page of COS with "<id>"
-    When I click the Contacts Review button
-    Given I access the contacts review page
-    Then I return to the details page of COS with "<id>"
-    Examples:
-      | enableFilter | disabledFilter | id|
-      | "Facebook"   | "Linkedin"     | "d47f5d81-5376-4b2d-a3a3-7ec92qw246f8" |
-      | "Linkedin"   | "Facebook"     | "d47f5d81-5376-4b2d-a3a3-7ec92qw246qw" |
+    When I click the Solve Duplicated Button
+    When The page appears with more than one row
+    Then The first row in the action column contains the buttons "Solve" and "Cancel"
+  @noerror
+  Scenario: Go Back Button return to the landing page of COS
+    Given I access the landing page of COS
+    When I click the Solve Duplicated Button
+    When I click the Go Back Button
+    Then I access the to the landing page of COS
+
+
+  @noerror
+  Scenario: The Manage Duplicate Contact Page appears when I click on the Solve Button
+    Given I access the landing page of COS
+    When I click the Solve Duplicated Button
+    When I click on the Button "Solve" of the first row
+    Then The Manage Duplicate Contact Page appear
+
+  Scenario: The Duplicate Contact is  saved in temporal data  when I click on the Cancel Button
+    Given I access the landing page of COS
+    When I click the Solve Duplicated Button
+    When I click on the Button "Cancel" of the first row
+    Then The contact is saved in temporal data to be exported
+
+  @noerror
+  Scenario: Export Contacts Data in CVS format
+    Given I access the landing page of COS
+    When I click the Solve Duplicated Button
+    When I click the Go Export
+    Then I can download a CVS file
+
