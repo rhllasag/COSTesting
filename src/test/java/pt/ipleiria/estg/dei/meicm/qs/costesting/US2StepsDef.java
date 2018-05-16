@@ -29,10 +29,14 @@ import static junit.framework.TestCase.assertFalse;
 
 public class US2StepsDef {
     private WebDriver driver;
+    private String baseURL;
 
     @Before
     public void setUp()throws Exception{
         driver = new HtmlUnitDriver();
+        baseURL = System.getProperty("baseUrl");
+        if (baseURL == null)
+            baseURL = "http://localhost:8080";
     }
 
     @After
@@ -42,7 +46,7 @@ public class US2StepsDef {
 
     @Given("^I access the details page of COS with \"([^\"]*)\"$")
     public void iAccessTheDetailsPageOfCOSWith(String id) throws Throwable {
-        driver.get("http://35.195.26.198/details.php?id="+id);
+        driver.get(baseURL + "/details.php?id=" +id);
     }
 
     @Then("^the title of details the page should be \"([^\"]*)\"$")

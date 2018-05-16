@@ -23,11 +23,15 @@ import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 public class US1StepsDef {
     private WebDriver driver;
+    private String baseURL;
 
 
     @Before
     public void setUp()throws Exception{
         driver = new HtmlUnitDriver();
+        baseURL = System.getProperty("baseUrl");
+        if (baseURL == null)
+            baseURL = "http://localhost:8080";
     }
 
     @After
@@ -37,7 +41,7 @@ public class US1StepsDef {
 
     @Given("^I access the landing page of COS$")
     public void iAccessTheLandingPageOfCOS() throws Throwable {
-        driver.get("http://35.195.26.198");
+        driver.get(baseURL);
         assertEquals ("Contacts Orchestrator Solution",driver.getTitle());
 
     }
