@@ -7,3 +7,7 @@ Feature: Access to the Solve Duplicated Problems page
   Scenario: Solve Duplicated Problems page's title
     Given I access the Duplicated Problems page
     Then the title of the  review page should be "Solve Duplicated Problems"
+  @noerror
+  Scenario: Test
+    Given I access the Duplicated Problems page
+    Then the title of the  review page should be "Solve Duplicated Problems"
