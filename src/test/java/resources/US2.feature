@@ -3,6 +3,7 @@ Feature: Access to the Contact Details Page
   I want to access to the contact detail page
   So that I can see the details of the selected contact
 
+  
   @noerror
   Scenario Outline: Detail page's title
     Given I access the details page of COS with "<id>"
