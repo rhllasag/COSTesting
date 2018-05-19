@@ -1,28 +1,50 @@
-Feature: Access to the Contact Details Page
+Feature: Access to the Solve Duplicated Problems Page
   As a user
-  I want to access to the contact detail page
-  So that I can see the details of the selected contact
-
-
-  @noerror
-  Scenario Outline: Table rows names
-    Given I access the landing page of COS
-    When  I choose the filtering "<enableFilter>" option and choose "<disabledFilter>" option and click on the detail button with "<id>"
-    Given I access the details page of COS with "<id>"
-    Then the table should have the rows: "GUID", "Given Name", "Surname", "Birthday", "Phone", "Email", "Street Addres" ,"City" , "Occupation", "Company" and "<Source>"
-    Examples:
-      | enableFilter | disabledFilter | Source | id|
-      | "Facebook"   | "Linkedin"     | "Facebook"   | "d47f5d81-5376-4b2d-a3a3-7ec92qw246f8" |
-      | "Linkedin"   | "Facebook"     | "Linkedin"   | "d47f5d81-5376-4b2d-a3a3-7ec92qw246qw" |
+  I want to access to the Solve Duplicated Page clicking the Solve Duplicate Button of the principal page
+  So that I can see the  duplicated contacts to solve throughout clicking on an action button
 
   @noerror
-  Scenario Outline: Go back to landing page
+  Scenario: Solve Duplicated Page's title
     Given I access the landing page of COS
-    When  I choose the filtering "<enableFilter>" option and choose "<disabledFilter>" option and click on the detail button with "<id>"
-    Given I access the details page of COS with "<id>"
-    When I click the Go back button
-    Then the landing page appears
-    Examples:
-      | enableFilter | disabledFilter | id|
-      | "Facebook"   | "Linkedin"     | "d47f5d81-5376-4b2d-a3a3-7ec92qw246f8" |
+    When I click the Solve Duplicated Button
+    Then the title of the  review page should be "Solve Duplicated Problems"
+
+  @noerror
+  Scenario: Columns name of Solve Duplicated Problems page
+    Given I access the landing page of COS
+    When I click the Solve Duplicated Button
+    Then The page appears with the columns "Repeated Field", "Times" , "Actions"
+
+  @noerror
+  Scenario: The  duplicated data is not empty and I can click on the Solve or Cancel button
+    Given I access the landing page of COS
+    When I click the Solve Duplicated Button
+    Then The first row in the action column contains the buttons "Solve" and "Cancel"
+
+  @noerror
+  Scenario: Go Back Button return to the landing page of COS
+    Given I access the landing page of COS
+    When I click the Solve Duplicated Button
+    And I click the Go Back Button
+    Then I access the to the landing page of COS
+
+  @noerror
+  Scenario: The Manage Duplicate Contact Page appears when I click on the Solve Button
+    Given I access the landing page of COS
+    When I click the Solve Duplicated Button
+    And I click on the Button "Solve" of the first row
+    Then The Manage Duplicate Contact Page appear
+
+  Scenario: The Duplicate Contact is  saved in temporal data  when I click on the Cancel Button
+    Given I access the landing page of COS
+    When I click the Solve Duplicated Button
+    And I click on the Button "Cancel" of the first row
+    Then The contact is saved in temporal data to be exported
+
+  @noerror
+  Scenario: Export Contacts Data in CVS format
+    Given I access the landing page of COS
+    When I click the Solve Duplicated Button
+    And I click the Go Export
+    Then I can download a CVS file
 

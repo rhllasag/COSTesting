@@ -1,50 +1,49 @@
-Feature: Access to the Solve Duplicated Problems Page
+Feature: Access to the Manage Duplicate Contact Page
   As a user
-  I want to access to the Solve Duplicated Page clicking the Solve Duplicate Button of the principal page
-  So that I can see the  duplicated contacts to solve throughout clicking on an action button
+  I want to access to the Manage Duplicate Contact Page
+  So that I can choose the valid repeated data of the contact to save and export
 
   @noerror
-  Scenario: Solve Duplicated Page's title
+  Scenario: The Manage Duplicate Contact Page Title
     Given I access the landing page of COS
     When I click the Solve Duplicated Button
-    Then the title of the  review page should be "Solve Duplicated Problems"
-  @noerror
-  Scenario: Columns name of Solve Duplicated Problems page
-    Given I access the landing page of COS
-    When I click the Solve Duplicated Button
-    Then The page appears with the columns "Repeated Field", "Times" , "Actions"
+    And I click on the Button "Solve" of the first row
+    Then The Manage Duplicate Contact Page appear with the title "Manage Duplicate Contact"
 
   @noerror
-  Scenario: The  duplicated data is not empty and I can click on the Solve or Cancel button
+  Scenario: The Manage Duplicate Contact receives repeated contacts of the previous page
     Given I access the landing page of COS
     When I click the Solve Duplicated Button
-    When The page appears with more than one row
-    Then The first row in the action column contains the buttons "Solve" and "Cancel"
-  @noerror
-  Scenario: Go Back Button return to the landing page of COS
-    Given I access the landing page of COS
-    When I click the Solve Duplicated Button
-    When I click the Go Back Button
-    Then I access the to the landing page of COS
-
+    And I click on the Button "Solve" of the first row
+    Then I have a no empty combo box in the header of the second column with Names of the contact repeated
 
   @noerror
-  Scenario: The Manage Duplicate Contact Page appears when I click on the Solve Button
+  Scenario: The Rows for the Table
     Given I access the landing page of COS
     When I click the Solve Duplicated Button
-    When I click on the Button "Solve" of the first row
-    Then The Manage Duplicate Contact Page appear
+    And I click on the Button "Solve" of the first row
+    Then the table should have the rows: "Name", "Email", "Number", "Birthday", "City", "Company", "Occupation", "Photo", "Source" and "Street Address"
 
-  Scenario: The Duplicate Contact is  saved in temporal data  when I click on the Cancel Button
+  @noerror
+  Scenario: The Contact can be selected by the Combo Box options
     Given I access the landing page of COS
     When I click the Solve Duplicated Button
-    When I click on the Button "Cancel" of the first row
+    And I click on the Button "Solve" of the first row
+    And I change the user selected
+    Then the table show another data
+
+  @noerror
+  Scenario: The Contact Information can be saved
+    Given I access the landing page of COS
+    When I click the Solve Duplicated Button
+    And I click on the Button "Solve" of the first row
+    And I click on the "Save" button
     Then The contact is saved in temporal data to be exported
 
   @noerror
-  Scenario: Export Contacts Data in CVS format
+  Scenario: Return to the Solve Duplicated Problems Page
     Given I access the landing page of COS
     When I click the Solve Duplicated Button
-    When I click the Go Export
-    Then I can download a CVS file
-
+    And I click on the Button "Solve" of the first row
+    And I click on the "Go Back" button
+    Then I can see the Solve Duplicated Problems Page without saving data to be exported
