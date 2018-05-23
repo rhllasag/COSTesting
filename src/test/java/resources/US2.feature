@@ -62,8 +62,7 @@ Feature: Access to the Contact Details Page
   Scenario: Phone has only numbers
     Given I access the details page of COS with "d4f8d88d-afe1-4c63-821a-278883d6bb49"
     Then the value on the phone field should be valid
-
-
+    
   @noerror
   Scenario: GUID is valid
     Given I access the details page of COS with "d4f8d88d-afe1-4c63-821a-278883d6bb49"
