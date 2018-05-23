@@ -90,7 +90,7 @@ public class US2StepsDef {
 
     @Given("^I access the details page of COS with no guid$")
     public void iAccessTheDetailsPageOfCOS() throws Throwable {
-        driver.get("http://localhost:8080/details.php");
+        driver.get(baseURL + "/details.php");
     }
 
     @Then("^the field phone shouldn't be empty$")
