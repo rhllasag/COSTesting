@@ -5,20 +5,14 @@ Feature: Access to the Contact Details Page
 
   
   @noerror
-  Scenario Outline: Detail page's title
-    Given I access the details page of COS with "<id>"
+  Scenario: Detail page's title
+    Given I access the details page of COS with "d4f8d88d-afe1-4c63-821a-278883d6bb49"
     Then the title of details the page should be "Contacts Orchestrator Solution - Contact details"
-    Examples:
-    | id |
-    | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
 
   @noerror
-  Scenario Outline: Table rows number
-    Given I access the details page of COS with "<id>"
-    Then the table should have eleven rows
-    Examples:
-      | id |
-      | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
+  Scenario: Table rows number
+    Given I access the details page of COS with "d4f8d88d-afe1-4c63-821a-278883d6bb49"
+    Then the table should have twelve rows
 
   @noerror
   Scenario Outline: Table data
@@ -34,29 +28,20 @@ Feature: Access to the Contact Details Page
       | 021a1dc3-5b75-4868-bb03-333170ce9acb| 4 | Santos |
 
     @noerror
-      Scenario Outline: Phone number is not empty
-      Given I access the details page of COS with "<id>"
+      Scenario: Phone number is not empty
+      Given I access the details page of COS with "d4f8d88d-afe1-4c63-821a-278883d6bb49"
       Then the field phone shouldn't be empty
-      Examples:
-      | id |
-      | d4f8d88d-afe1-4c63-821a-278883d6bb49  |
 
   @noerror
-  Scenario Outline: Go back to landing page
-    Given I access the details page of COS with "<id>"
+  Scenario: Go back to landing page
+    Given I access the details page of COS with "d4f8d88d-afe1-4c63-821a-278883d6bb49 "
     When I click the Go back button
     Then the landing page appears
-    Examples:
-      | id |
-      | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
 
     @error
-    Scenario Outline: Invalid user guid
-      Given I access the details page of COS with "<id>"
+    Scenario: Invalid user guid
+      Given I access the details page of COS with "invalid-id"
       Then the message "User not found" should be present
-      Examples:
-        | id |
-        | invalid-id |
 
   @error
   Scenario: User Guid empty
@@ -64,57 +49,23 @@ Feature: Access to the Contact Details Page
     Then the message "User guid is required" should be present
 
   @noerror
-  Scenario Outline: Valid Date format
-    Given I access the details page of COS with "<id>"
-    Then the date format should be "dd/MM/yyyy"
-    Examples:
-      | id |
-      | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
+  Scenario: Valid Date format
+    Given I access the details page of COS with "d4f8d88d-afe1-4c63-821a-278883d6bb49"
+    Then the date format should be "MM/dd/yyyy"
 
   @noerror
-  Scenario Outline: Valid email format
-    Given I access the details page of COS with "<id>"
+  Scenario: Valid email format
+    Given I access the details page of COS with "d4f8d88d-afe1-4c63-821a-278883d6bb49"
     Then the value on the email field should be a valid email
-    Examples:
-      | id |
-      | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
 
   @noerror
-  Scenario Outline: Phone has only numbers
-    Given I access the details page of COS with "<id>"
+  Scenario: Phone has only numbers
+    Given I access the details page of COS with "d4f8d88d-afe1-4c63-821a-278883d6bb49"
     Then the value on the phone field should be valid
-    Examples:
-      | id |
-      | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
+
 
   @noerror
-  Scenario Outline: GUID is valid
-    Given I access the details page of COS with "<id>"
+  Scenario: GUID is valid
+    Given I access the details page of COS with "d4f8d88d-afe1-4c63-821a-278883d6bb49"
     Then the value on the guid field should be a valid
-    Examples:
-      | id |
-      | d4f8d88d-afe1-4c63-821a-278883d6bb49 |
-
-
-  @noerror
-  Scenario Outline: Table rows names
-    Given I access the landing page of COS
-    When  I choose the filtering "<enableFilter>" option and choose "<disabledFilter>" option
-    And I click on the detail button with "<id>"
-    Then the table should have the rows: "GUID", "Given Name", "Surname", "Birthday", "Phone", "Email", "Street Addres" ,"City" , "Occupation", "Company" and "<Source>"
-    Examples:
-      | enableFilter | disabledFilter | Source | id|
-      | "Facebook"   | "Linkedin"     | "Facebook"   | "d47f5d81-5376-4b2d-a3a3-7ec92qw246f8" |
-      | "Linkedin"   | "Facebook"     | "Linkedin"   | "d47f5d81-5376-4b2d-a3a3-7ec92qw246qw" |
-
-  @noerror
-  Scenario Outline: Go back to landing page
-    Given I access the landing page of COS
-    When  I choose the filtering "<enableFilter>" option and choose "<disabledFilter>" option
-    And click on the detail button with "<id>"
-    And I click the Go back button
-    Then the landing page appears
-    Examples:
-      | enableFilter | disabledFilter | id|
-      | "Facebook"   | "Linkedin"     | "d47f5d81-5376-4b2d-a3a3-7ec92qw246f8" |
 

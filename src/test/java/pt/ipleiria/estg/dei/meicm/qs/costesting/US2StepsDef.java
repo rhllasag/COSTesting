@@ -56,10 +56,10 @@ public class US2StepsDef {
 
     }
 
-    @Then("^the table should have eleven rows$")
+    @Then("^the table should have twelve rows$")
     public void theTableShouldHaveElevenRows() throws Throwable {
        List<WebElement> rowsList = driver.findElement(By.tagName("table")).findElements(By.tagName("tr"));
-       assertEquals(rowsList.size(), 11);
+       assertEquals(rowsList.size(), 12);
     }
 
     @Then("^the \"([^\"]*)\" should have \"([^\"]*)\" on the second column$")
@@ -100,14 +100,18 @@ public class US2StepsDef {
     @Then("^the date format should be \"([^\"]*)\"$")
     public void theDateFormatShouldBe(String dateFormatStr) throws Throwable {
         Date date = null;
-        try {
-            String dateStr = driver.findElement(By.xpath("//tr[5]/td[2]")).getText();
-            SimpleDateFormat dateFormat = new SimpleDateFormat(dateFormatStr);
-            dateFormat.setLenient(false);
-            date = dateFormat.parse(dateStr);
+        String dateStr = driver.findElement(By.xpath("//tr[5]/td[2]")).getText();
+        if(dateStr.isEmpty()){
             assertTrue(true);
-        } catch (ParseException ex) {
-            assertTrue(false);
+        }else {
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat(dateFormatStr);
+                dateFormat.setLenient(false);
+                date = dateFormat.parse(dateStr);
+                assertTrue(true);
+            } catch (ParseException ex) {
+                assertTrue(false);
+            }
         }
     }
 
@@ -137,4 +141,28 @@ public class US2StepsDef {
         Matcher matcher = p.matcher(guid);
         assertTrue(matcher.find());
     }
+
+    @Given("^I access the landing page$")
+    public void iAccessTheLandingPage() throws Throwable {
+        driver.get(baseURL);
+    }
+
+    /*@Then("^the table should have \"([^\"]*)\" on the source field$")
+    public void theTableShouldHaveOnTheSourceField(String arg0) throws Throwable {
+        boolean isvalid = true;
+        List<WebElement> contactsList = driver.findElement(By.tagName("tbody")).findElements(By.tagName("tr"));
+        assertTrue(true);
+    }
+
+    @When("^I choose to enable  the \"([^\"]*)\" option and choose to disable the \"([^\"]*)\" option$")
+    public void iChooseToEnableTheOptionAndChooseToDisableTheOption(String enableSource, String disableSource) throws Throwable {
+        WebElement elementToDisable;
+        if(disableSource.equals("Facebook")){
+            elementToDisable = driver.findElement(By.xpath("//div[1]/label[2]/span"));
+        }else{
+            elementToDisable = driver.findElement(By.xpath("//div[2]/label[2]/span"));
+        }
+        elementToDisable.click();
+        wait();
+    }*/
 }

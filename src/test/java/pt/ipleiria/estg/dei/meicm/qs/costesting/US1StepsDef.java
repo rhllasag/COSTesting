@@ -43,7 +43,6 @@ public class US1StepsDef {
     public void iAccessTheLandingPageOfCOS() throws Throwable {
         driver.get(baseURL);
         assertEquals ("Contacts Orchestrator Solution",driver.getTitle());
-
     }
 
     @Then("^the title of the page should be \"([^\"]*)\"$")
@@ -71,10 +70,10 @@ public class US1StepsDef {
         driver.findElement(By.xpath("(//a[contains(text(),'Details')])[1]")).click();
     }
 
-    @Then("^the table should have four columns$")
+    @Then("^the table should have five columns$")
     public void theTableShouldHaveColumns() throws Throwable {
         List<WebElement> columnsList = driver.findElement(By.id("contact-row-d4f8d88d-afe1-4c63-821a-278883d6bb49")).findElements(By.tagName("td"));
-        assertEquals(columnsList.size(), 4);
+        assertEquals(columnsList.size(), 5);
     }
 
     @When("^I click the details button for the user with \"([^\"]*)\"$")
