@@ -13,7 +13,7 @@ Feature: Access to the Contacts Orchestrator Solution's (COS) Landing Page
     Given I access the landing page of COS
     Then the table should have five columns
 
-    
+
   @noerror
   Scenario: Click on the details button
     Given I access the landing page of COS

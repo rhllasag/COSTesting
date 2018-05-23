@@ -82,6 +82,7 @@ public class US2StepsDef {
     @Then("^the message \"([^\"]*)\" should be present$")
     public void theMessageShouldBePresent(String message) throws Throwable {
         String errorJson = driver.findElement(By.tagName("body")).getText();
+        System.out.println(errorJson);
         JSONObject obj = new JSONObject(errorJson);
         String errMsg = obj.getString("message");
         assertEquals(message, errMsg);
