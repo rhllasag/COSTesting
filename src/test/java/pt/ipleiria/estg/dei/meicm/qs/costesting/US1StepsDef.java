@@ -28,7 +28,7 @@ public class US1StepsDef {
 
     @Before
     public void setUp()throws Exception{
-        driver = new HtmlUnitDriver();
+        driver = new HtmlUnitDriver(true);
         baseURL = System.getProperty("baseUrl");
         if (baseURL == null)
             baseURL = "http://localhost:8080";

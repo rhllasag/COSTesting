@@ -68,3 +68,13 @@ Feature: Access to the Contact Details Page
     Given I access the details page of COS with "d4f8d88d-afe1-4c63-821a-278883d6bb49"
     Then the value on the guid field should be a valid
 
+  @noerror
+  Scenario Outline: Source field on details page
+    Given I access the landing page with a clean session
+    When I choose the to disable the "<disabledFilter>" option to list only "<source>"
+    And I click on the detail button
+    Then the table should have the value "<source>" on the source field
+    Examples:
+      | disabledFilter | source |
+      | LinkedIn     | Facebook   |
+      | Facebook     | LinkedIn   |

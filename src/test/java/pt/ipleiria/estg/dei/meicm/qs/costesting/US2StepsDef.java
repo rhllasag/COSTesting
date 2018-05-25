@@ -1,12 +1,13 @@
 package pt.ipleiria.estg.dei.meicm.qs.costesting;
 
-import cucumber.api.PendingException;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -22,10 +23,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static junit.framework.Assert.assertNotSame;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.TestCase.assertTrue;
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertFalse;
 
 public class US2StepsDef {
     private WebDriver driver;
@@ -33,7 +32,7 @@ public class US2StepsDef {
 
     @Before
     public void setUp()throws Exception{
-        driver = new HtmlUnitDriver();
+        driver = new HtmlUnitDriver(true);
         baseURL = System.getProperty("baseUrl");
         if (baseURL == null)
             baseURL = "http://localhost:8080";
@@ -143,27 +142,38 @@ public class US2StepsDef {
         assertTrue(matcher.find());
     }
 
-    @Given("^I access the landing page$")
+    @Given("^I access the landing page with a clean session$")
     public void iAccessTheLandingPage() throws Throwable {
-        driver.get(baseURL);
+        driver.get(baseURL+"/?clear_session=true");
     }
 
-    /*@Then("^the table should have \"([^\"]*)\" on the source field$")
+    @Then("^the table should have \"([^\"]*)\" on the source field$")
     public void theTableShouldHaveOnTheSourceField(String arg0) throws Throwable {
         boolean isvalid = true;
         List<WebElement> contactsList = driver.findElement(By.tagName("tbody")).findElements(By.tagName("tr"));
         assertTrue(true);
     }
 
-    @When("^I choose to enable  the \"([^\"]*)\" option and choose to disable the \"([^\"]*)\" option$")
-    public void iChooseToEnableTheOptionAndChooseToDisableTheOption(String enableSource, String disableSource) throws Throwable {
-        WebElement elementToDisable;
-        if(disableSource.equals("Facebook")){
-            elementToDisable = driver.findElement(By.xpath("//div[1]/label[2]/span"));
+    @When("^I click on the detail button$")
+    public void iClickTheDetailsButton() throws Throwable {
+        driver.findElement(By.xpath("(//a[contains(text(),'Details')])[1]")).click();
+    }
+
+    @Then("^the table should have the value \"([^\"]*)\" on the source field$")
+    public void theTableShouldHaveTheValueOnTheSourceField(String arg0) throws Throwable {
+        String sourceFieldText = driver.findElement(By.xpath("//tr[12]/td[2]")).getText();
+        assertEquals(sourceFieldText,arg0);
+    }
+
+    @When("^I choose the to disable the \"([^\"]*)\" option to list only \"([^\"]*)\"$")
+    public void iChooseTheToDisableTheOptionToList(String sourceToDisable, String source) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver,15);
+        if(sourceToDisable.equals("Facebook")){
+            ((JavascriptExecutor)driver).executeScript("document.getElementById(\"facebook_checkbox\").click();");
+            wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//tbody/tr[2]/td[5]"),source));
         }else{
-            elementToDisable = driver.findElement(By.xpath("//div[2]/label[2]/span"));
+            ((JavascriptExecutor)driver).executeScript("document.getElementById(\"linked_in_checkbox\").click();");
+            wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//tbody/tr[1]/td[5]"),source));
         }
-        elementToDisable.click();
-        wait();
-    }*/
+    }
 }
