@@ -29,14 +29,11 @@ Feature: Access to the Duplicate Contact Page
   @noerror
   Scenario: Clicking on Solve, the Solve duplicate information page appears
     Given I access the Duplicate Contact page
-    Given I click on the Solve Button
-    Then I access the Solve duplicate page
+    Given I click on the "Solve" Button of the row name "Estevan Rodrigues"
+    Given I send the "Estevan" and "Rodrigues" which parameters in the url
+    Then I recive "Estevan Rodrigues" in the View
   @noerror
   Scenario: Clicking on Cancel, the rows with the same information disappear
     Given I access the Duplicate Contact page
-    Given I click on the Cancel Button
-    Then The rows with the same information solved disappear
-  @noerror
-  Scenario: Identify duplicated contacts
-    Given I access the Duplicate Contact page
-    Then The can see contacts duplicated
+    Given I click on the "Cancel" Button with the name "Estevan Rodrigues"
+    Then The rows of "Estevan Rodrigues" disappear

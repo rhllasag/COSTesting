@@ -33,12 +33,13 @@ import java.nio.file.FileSystems;
 public class US4StepsDef {
     private WebDriver driver;
     private String baseURL;
-    private Date date=new Date();
-//    private final WireMockServer wireMockServer = new WireMockServer();
+    private Date date = new Date();
+    //    private final WireMockServer wireMockServer = new WireMockServer();
 //    private final CloseableHttpClient httpClient = HttpClients.createDefault();
     private static String downloadPath = "C:\\Users\\homer\\Downloads";
+
     @Before
-    public void setUp()throws Exception{
+    public void setUp() throws Exception {
         driver = new HtmlUnitDriver(true);
         baseURL = System.getProperty("baseUrl");
         if (baseURL == null)
@@ -46,13 +47,14 @@ public class US4StepsDef {
     }
 
     @After
-    public void tearDown()throws Exception{
+    public void tearDown() throws Exception {
 
     }
+
     @Given("^I access the Duplicate Contact page$")
     public void iAccessTheDuplicateContactPage() throws Throwable {
         driver.get(baseURL + "/duplicate.php");
-        assertEquals ("Contacts Orchestrator Solution - Duplicated contacts",driver.getTitle());
+        assertEquals("Contacts Orchestrator Solution - Duplicated contacts", driver.getTitle());
     }
 
     @Then("^The Manage Duplicate Contact Page appear with the title \"([^\"]*)\"$")
@@ -77,27 +79,30 @@ public class US4StepsDef {
     public void iClickOnTheExportButton() throws Throwable {
         driver.findElement(By.xpath("/html[1]/body[1]/div[@class=\"container\"]/div[1]/a[@class=\"btn btn-success\"]")).click();
     }
+
     @Then("^The file cvs is downloaded$")
     public void theFileCvsIsDownloaded() throws Throwable {
         Assert.assertTrue(isFileDownloaded());
     }
+
     public boolean isFileDownloaded() {
         String home = System.getProperty("user.home");
-        home+="\\Downloads";
-        home+="";
+        home += "\\Downloads";
+        home += "";
         boolean flag = false;
         File dir = new File(home);
         System.out.println(dir);
         File[] dir_contents = dir.listFiles();
 
         for (int i = 0; i < dir_contents.length; i++) {
-            String dat = new SimpleDateFormat("yyyy-MM-dd",   Locale.getDefault()).format(new Date());
-            String fileName="solved_duplicates_"+dat+".csv";
+            String dat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            String fileName = "solved_duplicates_" + dat + ".csv";
             if (dir_contents[i].getName().equals(fileName))
-                return flag=true;
+                return flag = true;
         }
         return flag;
     }
+
     @Then("^For each duplicated contact i have the options to \"([^\"]*)\" and \"([^\"]*)\"$")
     public void forEachDuplicatedContactIHaveTheOptionsToAnd(String solve, String cancel) throws Throwable {
         driver.findElement(By.xpath("id(\"duplicate_contacts_table_holder\")/table[@class=\"table table-striped\"]/tbody[1]/tr[1]/td[3]/a[@class=\"btn btn-success\"]"));
@@ -106,27 +111,53 @@ public class US4StepsDef {
 
     @Given("^I click on the Solve Button$")
     public void iClickOnTheSolveButton() throws Throwable {
-        driver.findElement(By.xpath("id(\"duplicate_contacts_table_holder\")/table[@class=\"table table-striped\"]/tbody[1]/tr[1]/td[3]/a[@class=\"btn btn-success\"]")).click();
-    }
 
-    @Then("^I access the Solve duplicate page$")
-    public void iAccessTheSolveDuplicatePage() throws Throwable {
+    }
+    @Then("^I access to the Solve duplicate page$")
+    public void iAccessToTheSolveDuplicatePage() throws Throwable {
         driver.get(baseURL + "/solve_duplicate.php?duplicate_field=Name&key=Joao%20Santos");
-        assertEquals ("Contacts Orchestrator Solution - Solve duplicated contact",driver.getTitle());
+        assertEquals("Contacts Orchestrator Solution - Solve duplicated contact", driver.getTitle());
     }
-
     @Given("^I click on the Cancel Button$")
     public void iClickOnTheCancelButton() throws Throwable {
         driver.findElement(By.xpath("id(\"duplicate_contacts_table_holder\")/table[@class=\"table table-striped\"]/tbody[1]/tr[1]/td[3]/a[@class=\"btn btn-default\"]")).click();
     }
 
-    @Then("^The rows with the same information solved disappear$")
-    public void theRowsWithTheSameInformationSolvedDisappear() throws Throwable {
-        assertFalse(true);
+
+    @Given("^I click on the Solve Button of the row$")
+    public void iClickOnTheSolveButtonOfTheRow() throws Throwable {
+        driver.findElement(By.xpath("id(\"duplicate_contacts_table_holder\")/table[@class=\"table table-striped\"]/tbody[1]/tr[1]/td[1]/a[@class=\"btn btn-success\"]")).click();
+
     }
 
-    @Then("^The can see contacts duplicated$")
-    public void theCanSeeContactsDuplicated() throws Throwable {
-        assertFalse(true);
+    @Given("^I click on the Solve Button of the row name \"([^\"]*)\"$")
+    public void iClickOnTheSolveButtonOfTheRowName(String Name) throws Throwable {
+     assertEquals(driver.findElement(By.xpath("id(\"duplicate_contacts_table_holder\")/table[@class=\"table table-striped\"]/tbody[1]/tr[1]/td[1]")).getText(),"Name: "+Name);
+    }
+    @Then("^The rows of \"([^\"]*)\" disappear$")
+    public void theRowsOfDisappear(String name) throws Throwable {
+        assertFalse(driver.findElement(By.xpath("id(\"duplicate_contacts_table_holder\")/table[@class=\"table table-striped\"]/tbody[1]/tr[1]/td[1]")).getText()=="Name: "+name);
+    }
+
+    @Given("^I click on the \"([^\"]*)\" Button with the name \"([^\"]*)\"$")
+    public void iClickOnTheButtonWithTheName(String cancel, String name) throws Throwable {
+        assertEquals(driver.findElement(By.xpath("id(\"duplicate_contacts_table_holder\")/table[@class=\"table table-striped\"]/tbody[1]/tr[1]/td[3]/a[@class=\"btn btn-default\"]")).getText(),cancel);
+    }
+
+    @Given("^I click on the \"([^\"]*)\" Button of the row name \"([^\"]*)\"$")
+    public void iClickOnTheButtonOfTheRowName(String solve, String name) throws Throwable {
+        assertEquals(driver.findElement(By.xpath("id(\"duplicate_contacts_table_holder\")/table[@class=\"table table-striped\"]/tbody[1]/tr[1]/td[3]/a[@class=\"btn btn-success\"]")).getText(),solve);
+
+    }
+
+    @Then("^I recive \"([^\"]*)\" in the View$")
+    public void iReciveInTheView(String name) throws Throwable {
+        assertEquals(driver.findElement(By.xpath("id(\"solve_duplicate_content\")/table[@class=\"table table-bordered\"]/tbody[1]/tr[1]/td[2]/div[@class=\"radio\"]/label[1]")).getText(),name);
+    }
+
+    @Given("^I send the \"([^\"]*)\" and \"([^\"]*)\" which parameters in the url$")
+    public void iSendTheAndWhichParametersInTheUrl(String name, String surname) throws Throwable {
+        driver.get(baseURL+"/solve_duplicate.php?duplicate_field=Name&key="+name+"%20"+surname);
+        assertEquals("Contacts Orchestrator Solution - Solve duplicated contact", driver.getTitle());
     }
 }
