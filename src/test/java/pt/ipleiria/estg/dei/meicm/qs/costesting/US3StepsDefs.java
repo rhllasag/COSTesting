@@ -28,7 +28,7 @@ public class US3StepsDefs {
         driver = new HtmlUnitDriver(true);
         baseURL = System.getProperty("baseUrl");
         if (baseURL == null)
-            baseURL = "http://localhost:8080";
+            baseURL = "http://35.195.26.198";
     }
 
     @After
