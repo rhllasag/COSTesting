@@ -31,7 +31,7 @@ public class US4StepsDef {
         driver = new HtmlUnitDriver(true);
         baseURL = System.getProperty("baseUrl");
         if (baseURL == null)
-            baseURL = "http://35.195.26.198";
+            baseURL = "http://localhost:8080";
     }
 
     @After
@@ -75,7 +75,7 @@ public class US4StepsDef {
 
     public boolean isFileDownloaded() {
         String home = System.getProperty("user.home");
-        home += "\\Downloads";
+        home += "/Downloads";
         home += "";
         boolean flag = false;
         File dir = new File(home);

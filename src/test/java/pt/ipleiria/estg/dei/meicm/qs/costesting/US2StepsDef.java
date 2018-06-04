@@ -35,7 +35,7 @@ public class US2StepsDef {
         driver = new HtmlUnitDriver(true);
         baseURL = System.getProperty("baseUrl");
         if (baseURL == null)
-            baseURL = "http://35.195.26.198";
+            baseURL = "http://localhost:8080";
     }
 
     @After
