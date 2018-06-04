@@ -16,7 +16,7 @@ Feature: Access to the Duplicate Contact Page
   Scenario: Return to the landing page
     Given I access the Duplicate Contact page
     When I click on the Back Button
-    Then I access the landing page of COS
+    Then the landing page of should appear
   @noerror
   Scenario: Export a CVS File with contacts
     Given I access the Duplicate Contact page
@@ -25,15 +25,14 @@ Feature: Access to the Duplicate Contact Page
   @noerror
   Scenario: Actions Solve and Cancel Duplicated contact Buttons
     Given I access the Duplicate Contact page
-    Then For each duplicated contact i have the options to "Solve" and " Cancel"
+    Then For the duplicated contact I have the options to "Solve" and "Cancel"
   @noerror
   Scenario: Clicking on Solve, the Solve duplicate information page appears
     Given I access the Duplicate Contact page
-    Given I click on the "Solve" Button of the row name "Estevan Rodrigues"
-    Given I send the "Estevan" and "Rodrigues" which parameters in the url
-    Then I recive "Estevan Rodrigues" in the View
+    When I click on the Solve Button of the first row
+    Then I have "Estevan Rodrigues" in the solve duplicate view
   @noerror
   Scenario: Clicking on Cancel, the rows with the same information disappear
     Given I access the Duplicate Contact page
-    Given I click on the "Cancel" Button with the name "Estevan Rodrigues"
-    Then The rows of "Estevan Rodrigues" disappear
+    And I click on the cancel button of the first row
+    Then The row of "Estevan Rodrigues" disappear
