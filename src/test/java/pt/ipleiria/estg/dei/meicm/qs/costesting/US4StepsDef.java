@@ -80,12 +80,12 @@ public class US4StepsDef {
         boolean flag = false;
         File dir = new File(home);
         System.out.println(dir);
-        File[] dir_contents = dir.listFiles();
+        String[] dir_contents = dir.list();
 
         for (int i = 0; i < dir_contents.length; i++) {
             String dat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
             String fileName = "solved_duplicates_" + dat + ".csv";
-            if (dir_contents[i].getName().equals(fileName))
+            if (dir_contents[i].equals(fileName))
                 return true;
         }
         return flag;
