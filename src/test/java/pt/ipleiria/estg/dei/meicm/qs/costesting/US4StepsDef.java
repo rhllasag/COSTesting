@@ -79,11 +79,11 @@ public class US4StepsDef {
     }
 
     public boolean isFileDownloaded() throws IOException {
-        String home = System.getProperty("user.home");
+        /*String home = System.getProperty("user.home");
         home += "/Downloads";
-        home += "";
+        home += "";*/
         boolean flag = false;
-        final Path dir = Paths.get(home);
+        final Path dir = Paths.get(System.getProperty("java.io.tmpdir"));
 
         final DirectoryStream<Path> dirStream = Files.newDirectoryStream(dir);
 
