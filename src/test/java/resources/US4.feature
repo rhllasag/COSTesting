@@ -17,11 +17,11 @@ Feature: Access to the Duplicate Contact Page
     Given I access the Duplicate Contact page
     When I click on the Back Button
     Then the landing page of should appear
-  @noerror
+"""  @noerror
   Scenario: Export a CVS File with contacts
     Given I access the Duplicate Contact page
     When I click on the Export Button
-    Then The file cvs is downloaded
+    Then The file cvs is downloaded """
   @noerror
   Scenario: Actions Solve and Cancel Duplicated contact Buttons
     Given I access the Duplicate Contact page
