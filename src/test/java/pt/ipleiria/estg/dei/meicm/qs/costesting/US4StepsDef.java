@@ -15,6 +15,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -73,19 +78,19 @@ public class US4StepsDef {
         Assert.assertTrue(isFileDownloaded());
     }
 
-    public boolean isFileDownloaded() {
+    public boolean isFileDownloaded() throws IOException {
         String home = System.getProperty("user.home");
         home += "/Downloads";
         home += "";
         boolean flag = false;
-        File dir = new File(home);
-        System.out.println(dir);
-        String[] dir_contents = dir.list();
+        final Path dir = Paths.get(home);
 
-        for (int i = 0; i < dir_contents.length; i++) {
+        final DirectoryStream<Path> dirStream = Files.newDirectoryStream(dir);
+
+        for (Path p : dirStream) {
             String dat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
             String fileName = "solved_duplicates_" + dat + ".csv";
-            if (dir_contents[i].equals(fileName))
+            if (p.getFileName().equals(fileName))
                 return true;
         }
         return flag;
