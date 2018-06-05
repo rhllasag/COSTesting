@@ -79,7 +79,6 @@ public class US4StepsDef {
     }
 
     public boolean isFileDownloaded() throws IOException {
-        boolean flag = false;
         final Path dir = Paths.get(System.getProperty("java.io.tmpdir"));
 
         final DirectoryStream<Path> dirStream = Files.newDirectoryStream(dir);
@@ -90,7 +89,7 @@ public class US4StepsDef {
             if (p.getFileName().equals(fileName))
                 return true;
         }
-        return flag;
+        return false;
     }
 
     @Then("^For the duplicated contact I have the options to \"([^\"]*)\" and \"([^\"]*)\"$")

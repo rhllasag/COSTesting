@@ -17,7 +17,7 @@ Feature: Access to the Duplicate Contact Page
     Then the manage duplicate contacts page should appear
 
   @noerror
-  Scenario: Go to the previous page
+  Scenario: Save solved contact
     Given I access the Duplicate Contact page with a clean session
     When I click on the first Solve Button
     And I click on the go save button
@@ -28,3 +28,9 @@ Feature: Access to the Duplicate Contact Page
     Given I access the Duplicate Contact page with a clean session
     When I click on the first Solve Button
     Then I can see the fields "Name", "Photo", "Email", "Birthday", "Company", "City", "Occupation", "Source" and "Street Address"
+
+  @noerror
+  Scenario: Duplicated field is really duplicated
+    Given I access the Duplicate Contact page with a clean session
+    When I click on the first Solve Button
+    Then The name field should have the same data

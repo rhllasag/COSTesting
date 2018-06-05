@@ -95,4 +95,9 @@ public class US5StepsDef {
         assertEquals(driver.findElement(By.tagName("title")).getText(), "Contacts Orchestrator Solution - Duplicated contacts");
         assertFalse(driver.findElement(By.xpath("//tbody/tr[1]/td[1]")).getText()=="Name: "+name);
     }
+
+    @Then("^The name field should have the same data$")
+    public void theNameFieldShouldHaveTheSameData() throws Throwable {
+        assertEquals(driver.findElement(By.xpath("//div[2]/label")).getText(), driver.findElement(By.xpath("//div[1]/label")).getText());
+    }
 }
