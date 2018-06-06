@@ -18,16 +18,56 @@ Feature: Access to the Duplicate Contact Page
     When I click on the Back Button
     Then the landing page of should appear
   @noerror
+  Scenario: Export a CVS File with contacts
+    Given I access the Duplicate Contact page
+    When I click on the Export Button
+    Then The file cvs is downloaded
+  @noerror
   Scenario: Actions Solve and Cancel Duplicated contact Buttons
     Given I access the Duplicate Contact page
-    Then For the duplicated contact I have the options to "Solve" and "Cancel"
+    Then For each duplicated contact i have the options to "Solve" and " Cancel"
+
   @noerror
-  Scenario: Clicking on Solve, the Solve duplicate information page appears
+  Scenario Outline: Clicking on Solve by name, the Solve duplicate information page appears
+
     Given I access the Duplicate Contact page
-    When I click on the Solve Button of the first row
-    Then I have "Estevan Rodrigues" in the solve duplicate view
+    Given I click on the "Solve" Button of the row name "<firstname>" with the "<surname>"
+    Given I send the "<firstname>" and "<surname>" which parameters in the url
+    Then I receive "<firstname>" "<surname>" in the View
+    Examples:
+      |firstname| surname|
+      |Estevan|Rodrigues|
+      |Sophia|Barros|
+      |Joao|Santos|
+      |Bruno|Carvalho|
+      |Luis|Silva|
   @noerror
-  Scenario: Clicking on Cancel, the rows with the same information disappear
+  Scenario Outline: Clicking on Solve by number, the Solve duplicate information page appears
+
     Given I access the Duplicate Contact page
-    And I click on the cancel button of the first row
-    Then The row of "Estevan Rodrigues" disappear
+    Given I click on the "Solve" Button of the row number "<number>"
+    Then I send the "<number>" which parameters in the url
+    Examples:
+      |number|
+      |232582789|
+      |244534398|
+      |244163484|
+  @noerror
+  Scenario Outline: Clicking on Solve by email, the Solve duplicate information page appears
+
+    Given I access the Duplicate Contact page
+    Given I click on the "Solve" Button of the row email "<email>"
+    Then I send the email "<email>" which parameters in the url
+    Examples:
+      |email|
+      |EstevanRibeiroRodrigues@cuvox.de|
+      |JoaoRibeiroSantos@teleworm.us|
+      |SophiaFernandesBarros@cuvox.de|
+  @noerror
+  Scenario Outline: Clicking on Cancel, the rows with the same information disappear of the table
+    Given I access the Duplicate Contact page
+    Given I click on the "Cancel" Button with the "<resource>"
+    Then The rows of "<resource>" disappear
+    Examples:
+      |resource|
+      |Name: Estevan Rodrigues|
