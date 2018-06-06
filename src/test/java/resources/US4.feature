@@ -38,27 +38,7 @@ Feature: Access to the Duplicate Contact Page
       |Bruno|Carvalho|
       |Luis|Silva|
   @noerror
-  Scenario Outline: Clicking on Solve by number, the Solve duplicate information page appears
 
-    Given I access the Duplicate Contact page
-    Given I click on the "Solve" Button of the row number "<number>"
-    Then I send the "<number>" which parameters in the url
-    Examples:
-      |number|
-      |232582789|
-      |244534398|
-      |244163484|
-  @noerror
-  Scenario Outline: Clicking on Solve by email, the Solve duplicate information page appears
-
-    Given I access the Duplicate Contact page
-    Given I click on the "Solve" Button of the row email "<email>"
-    Then I send the email "<email>" which parameters in the url
-    Examples:
-      |email|
-      |EstevanRibeiroRodrigues@cuvox.de|
-      |JoaoRibeiroSantos@teleworm.us|
-      |SophiaFernandesBarros@cuvox.de|
   @noerror
   Scenario Outline: Clicking on Cancel, the rows with the same information disappear of the table
     Given I access the Duplicate Contact page
@@ -67,3 +47,9 @@ Feature: Access to the Duplicate Contact Page
     Examples:
       |resource|
       |Name: Estevan Rodrigues|
+
+  #@noerror
+   #Scenario: Export a CVS File with contacts
+  #Given I access the Duplicate Contact page
+  #When I click on the Export Button
+  #Then The file cvs is downloaded
